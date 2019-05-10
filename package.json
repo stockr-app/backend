@@ -1,5 +1,5 @@
 {
-  "name": "front-end",
+  "name": "back-end",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -14,7 +14,7 @@
     "eject": "react-scripts eject"
   },
   "repository": {
-    "url": "https://github.com/stockrteam/frontend.git"
+    "url": "https://github.com/stockr-app/backend.git"
   },
   "eslintConfig": {
     "extends": "react-app"
