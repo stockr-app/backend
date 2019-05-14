@@ -19,5 +19,29 @@ They are:
 
 All routes can be **found in the routes folder** 
 
-inside the route folder is a **router.js** file this is the main router. **All other routers are routed through this file**
+inside the route folder is a **router.js** file this is the main router. **All other routers are routed through this file** which is then conected to the **server.js** file
+
+## data folder
+
+The data folder is home to the:
+
+- **dbHelpers** folder
+- **migtations** folder
+- **dbConfig.js** file 
+- **stockr.sqlite3** file
+
+## dbHelpers
+
+The dbHelpers fold houses all of the database helper functions.
+
+dbHelpers are functions used to help the routes connect to the database 
+
+Currently there is only the userDB.js file.
+
+### userDB.js 
+
+userDB currently has four helper functions :
+
+- createUser()
+- 
 
