@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const db = require("../data/dbHelpers/userDB.js");
 const router = express.Router();
 
+//get all users
 router.get("/",async (req, res) => {
   try {
     const users = await db.getAllUsers(req.body);
@@ -13,6 +14,7 @@ router.get("/",async (req, res) => {
   }
 });
 
+//get user by id
 router.get("/:id",async (req, res) => {
   try {
     const  id = req.params.id;
@@ -31,6 +33,7 @@ router.get("/:id",async (req, res) => {
   }
 });
 
+//create user could also be register
 router.post("/", (req, res) => {
     let user = req.body;
     const hash = bcrypt.hashSync(user.password, 10);
@@ -46,6 +49,7 @@ router.post("/", (req, res) => {
       });
   });
 
+  //delte user 
 router.delete('/:id', async (req,res)=>{
     try{
         let user = await db.deleteUser(req.params.id);
