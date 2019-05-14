@@ -19,7 +19,7 @@ They are:
 
 All routes can be **found in the routes folder** 
 
-inside the route folder is a **router.js** file this is the main router. **All other routers are routed through this file** which is then conected to the **server.js** file
+inside the route folder is a **router.js** file this is the main router. **All other routers are routed through this file** which is then connected to the **server.js** file
 
 ## data folder
 
