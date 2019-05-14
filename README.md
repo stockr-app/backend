@@ -43,5 +43,7 @@ Currently there is only the userDB.js file.
 userDB currently has four helper functions :
 
 - createUser()
-- 
+- getUserById()
+- getAllUsers()
+- deleteUser()
 
