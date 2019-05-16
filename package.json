@@ -16,11 +16,14 @@
     "sqlite3": "^4.0.6"
   },
   "scripts": {
+    "test": "jest --watch --verbose",
     "server": "nodemon",
     "start": "node index.js"
   },
   "devDependencies": {
-    "nodemon": "^1.18.10"
+    "jest": "^24.8.0",
+    "nodemon": "^1.18.10",
+    "supertest": "^4.0.2"
   },
   "repository": {
     "url": "https://github.com/stockr-app/backend.git"
