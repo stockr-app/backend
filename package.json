@@ -4,22 +4,28 @@
   "private": true,
   "main": "index.js",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
+    "dotenv": "^8.0.0",
     "express": "^4.16.4",
-    "knex": "^0.16.3",
+    "helmet": "^3.18.0",
+    "knex": "^0.16.5",
     "morgan": "^1.9.1",
+    "pg": "^7.11.0",
     "sqlite3": "^4.0.6"
   },
   "scripts": {
+    "test": "jest --watch --verbose",
     "server": "nodemon",
     "start": "node index.js"
   },
   "devDependencies": {
-    "nodemon": "^1.18.10"
+    "jest": "^24.8.0",
+    "nodemon": "^1.18.10",
+    "supertest": "^4.0.2"
   },
   "repository": {
     "url": "https://github.com/stockr-app/backend.git"
   }
-
 }
