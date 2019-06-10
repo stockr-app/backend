@@ -5,10 +5,10 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   try {
-    const users = await db.getAllUsers(req.body);
+    const users = await db.getAllUsers();
     res.status(200).json(users);
   } catch (error) {
-    res.status(500), json(error);
+    res.status(500).json(error);
   }
 });
 
@@ -38,7 +38,17 @@ router.post("/", (req, res) => {
       res.status(500).json(error);
     });
 });
+router.put('/:id', async (req, res)=>{
+  try{
+    const changes = req.body;
+    const {id} = req.params;
+    let user = await db.updateUser(id, changes)
+    res.status(200).json(user)
+  }
+  catch(error){
 
+  }
+})
 router.delete("/:id", async (req, res) => {
   try {
     let user = await db.deleteUser(req.params.id);
