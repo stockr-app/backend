@@ -14,15 +14,12 @@ docClient = new AWS.DynamoDB.DocumentClient();
 const tableName = "userTable";
 var user_id = "test_user";
 var user_name = "Test User";
-router.post("/api/note", (req, res, next) => {
+router.post("/api/stock", (req, res, next) => {
   let item = req.body.Item;
   item.user_id = user_id;
   item.user_name = user_name;
-  item.note_id = user_id + ":" + uuidv4();
   item.timestamp = moment().unix();
-  item.expires = moment()
-    .add(90, "days")
-    .unix();
+  
 
   docClient.put(
     {
@@ -42,13 +39,11 @@ router.post("/api/note", (req, res, next) => {
     }
   );
 });
-router.patch("/api/note", (req, res, next) => {
+router.patch("/api/stock", (req, res, next) => {
   let item = req.body.Item;
   item.user_id = user_id;
   item.user_name = user_name;
-  item.expires = moment()
-    .add(90, "days")
-    .unix();
+ 
 
   docClient.put(
     {
@@ -76,7 +71,7 @@ router.patch("/api/note", (req, res, next) => {
   );
 });
 
-router.get("/api/notes", (req, res, next) => {
+router.get("/api/stocks", (req, res, next) => {
   let limit = req.query.limit ? parseInt(req.query.limit) : 5;
   let params = {
     TableName: tableName,
@@ -108,16 +103,16 @@ router.get("/api/notes", (req, res, next) => {
   });
 });
 
-router.get("/api/note/:st", (req, res, next) => {
-  let note_id = req.params.note_id;
+router.get("/api/stock/:stock", (req, res, next) => {
+  let stock = req.params.stock;
   let params = {
     TableName: tableName,
-    IndexName: "note_id-index",
-    KeyConditionExpression: "note_id = :note_id",
+    IndexName: "stock-index",
+    KeyConditionExpression: "stock = :stock",
     ExpressionAttributeValues: {
-      ":note_id": note_id
+      ":stock": stock
     },
-    Limit: 1
+    Limit: 5
   };
 
   docClient.query(params, (err, data) => {
@@ -129,14 +124,14 @@ router.get("/api/note/:st", (req, res, next) => {
       });
     } else {
       if (!_.isEmpty(data.Items)) {
-        return res.status(200).send(data.Items[0]);
+        return res.status(200).send(data.Items);
       } else {
         return res.status(404).send();
       }
     }
   });
 });
-router.delete("/api/note/:timestamp", (req, res, next) => {
+router.delete("/api/stock/:timestamp", (req, res, next) => {
   let timestamp = parseInt(req.params.timestamp);
   let params = {
     TableName: tableName,
