@@ -1,4 +1,7 @@
 version: 0.2
-artifacts:
-  files:
-    - '**/*'
+
+phases:
+  install:
+    runtime-versions:
+        nodejs: 8, nodejs: 10
+ 
