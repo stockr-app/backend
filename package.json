@@ -20,7 +20,7 @@
   },
   "scripts": {
     "server": "nodemon",
-    "start": "node index.js"
+    "start": "node app.js"
   },
   "devDependencies": {
     "nodemon": "^1.18.10"
