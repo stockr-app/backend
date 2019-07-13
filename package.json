@@ -2,7 +2,7 @@
   "name": "back-end",
   "version": "0.1.0",
   "private": true,
-  "main": "index.js",
+  "main": "app.js",
   "dependencies": {
     "aws-sdk": "^2.489.0",
     "body-parser": "^1.18.3",
@@ -19,7 +19,7 @@
     "uuid": "^3.3.2"
   },
   "scripts": {
-    "server": "nodemon",
+    "server": "nodemon ",
     "start": "node app.js"
   },
   "devDependencies": {

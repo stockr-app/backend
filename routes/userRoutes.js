@@ -13,14 +13,11 @@ AWS.config.update({ region: "us-west-2" });
 docClient = new AWS.DynamoDB.DocumentClient();
 
 const tableName = "userTable";
-var user_id = "test_user";
-var user_name = "Test User";
+
 
 
 router.post("/api/stock", customAuth, (req, res, next) => {
   let item = req.body.Item;
-  item.user_id = user_id;
-  item.user_name = user_name;
   item.timestamp = moment().unix();
 
   docClient.put(
