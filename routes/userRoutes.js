@@ -6,6 +6,10 @@ const AWS = require("aws-sdk");
 
 
 const router = express.Router();
+AWS.config.region = 'us-west-2'; // Region
+AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+    IdentityPoolId: 'us-west-2:2f5d4f16-81aa-49cf-9b05-fec0923809b3',
+});
 
 AWS.config.update({ region: "us-west-2" });
 
@@ -150,3 +154,4 @@ router.delete("/api/stock/:timestamp", (req, res, next) => {
   });
 });
 module.exports = router;
+// Initialize the Amazon Cognito credentials provider
