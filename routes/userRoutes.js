@@ -73,25 +73,17 @@ router.patch("/api/stock", (req, res, next) => {
 });
 
 router.get("/api/stocks", (req, res, next) => {
-  let limit = req.query.limit ? parseInt(req.query.limit) : 5;
   let params = {
-    TableName: tableName,
-    KeyConditios: "user_id",
-    // ExpressionAttributeValues: {
-    //   ":uid": user_id
-    // },
-    Limit: limit,
-    ScanIndexForward: false
+    TableName: tableName
   };
   let startTimestamp = req.query.start ? parseInt(req.query.start) : 0;
 
   if (startTimestamp > 0) {
     params.ExclusiveStartKey = {
-      user_id: user_id,
       timestamp: startTimestamp
     };
   }
-  docClient.query(params, (err, data) => {
+  docClient.scan(params, (err, data) => {
     if (err) {
       console.log(err);
       return res.status(err.statusCode).send({
