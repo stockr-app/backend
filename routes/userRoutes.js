@@ -2,9 +2,9 @@ require("dotenv").config();
 const express = require("express");
 const moment = require("moment");
 const _ = require("underscore");
-const uuidv4 = require("uuid/v4");
+
 const AWS = require("aws-sdk");
-const customAuth = require("../middleware/auth.js");
+
 
 const router = express.Router();
 
@@ -12,11 +12,11 @@ AWS.config.update({ region: "us-west-2" });
 
 docClient = new AWS.DynamoDB.DocumentClient();
 
-const tableName = "userTable";
+const tableName = "stockingUsers";
 
 
 
-router.post("/api/stock", customAuth, (req, res, next) => {
+router.post("/api/stock", (req, res, next) => {
   let item = req.body.Item;
   item.timestamp = moment().unix();
 
@@ -38,7 +38,7 @@ router.post("/api/stock", customAuth, (req, res, next) => {
     }
   );
 });
-router.patch("/api/stock", customAuth, (req, res, next) => {
+router.patch("/api/stock", (req, res, next) => {
   let item = req.body.Item;
   item.user_id = user_id;
   item.user_name = user_name;
@@ -69,7 +69,7 @@ router.patch("/api/stock", customAuth, (req, res, next) => {
   );
 });
 
-router.get("/api/stocks", customAuth, (req, res, next) => {
+router.get("/api/stocks", (req, res, next) => {
   let limit = req.query.limit ? parseInt(req.query.limit) : 5;
   let params = {
     TableName: tableName,
@@ -101,7 +101,7 @@ router.get("/api/stocks", customAuth, (req, res, next) => {
   });
 });
 
-router.get("/api/stock/:stock", customAuth, (req, res, next) => {
+router.get("/api/stock/:stock", (req, res, next) => {
   let stock = req.params.stock;
   let params = {
     TableName: tableName,
@@ -129,7 +129,7 @@ router.get("/api/stock/:stock", customAuth, (req, res, next) => {
     }
   });
 });
-router.delete("/api/stock/:timestamp", customAuth, (req, res, next) => {
+router.delete("/api/stock/:timestamp", (req, res, next) => {
   let timestamp = parseInt(req.params.timestamp);
   let params = {
     TableName: tableName,
