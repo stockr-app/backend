@@ -76,10 +76,10 @@ router.get("/api/stocks", (req, res, next) => {
   let limit = req.query.limit ? parseInt(req.query.limit) : 5;
   let params = {
     TableName: tableName,
-    KeyConditionExpression: "user_id = :uid",
-    ExpressionAttributeValues: {
-      ":uid": user_id
-    },
+    // KeyConditionExpression: "user_id = :uid",
+    // ExpressionAttributeValues: {
+    //   ":uid": user_id
+    // },
     Limit: limit,
     ScanIndexForward: false
   };
