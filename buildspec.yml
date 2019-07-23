@@ -4,4 +4,6 @@ phases:
   install:
     runtime-versions:
         nodejs: 10
- 
+    artifacts:
+  files:
+    - arn:aws:s3:::codepipeline-us-west-2-852923527029
