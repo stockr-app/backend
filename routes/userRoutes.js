@@ -71,7 +71,7 @@ router.patch("/api/stock", (req, res, next) => {
     }
   );
 });
-
+//get all table data 
 router.get("/api/stocks", (req, res, next) => {
   let params = {
     TableName: tableName
@@ -84,6 +84,37 @@ router.get("/api/stocks", (req, res, next) => {
     };
   }
   docClient.scan(params, (err, data) => {
+    if (err) {
+      console.log(err);
+      return res.status(err.statusCode).send({
+        message: err.message,
+        status: err.statusCode
+      });
+    } else {
+      return res.status(200).send(data);
+    }
+  });
+});
+//get by user_id 
+router.get("/api/:user_id", (req, res, next) => {
+  let user_id = req.params.user_id
+  let params = {
+    TableName: tableName,
+    KeyConditionExpression: "user_id = :user_id",
+    ExpressionAttributeValues: {
+      ":user_id": user_id
+    }
+  };
+
+  let startTimestamp = req.query.start ? parseInt(req.query.start) : 0;
+
+  if (startTimestamp > 0) {
+    params.ExclusiveStartKey = {
+      user_id: user_id,
+      timestamp: startTimestamp
+    };
+  }
+  docClient.query(params, (err, data) => {
     if (err) {
       console.log(err);
       return res.status(err.statusCode).send({
