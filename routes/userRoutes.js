@@ -72,7 +72,7 @@ router.patch("/api/stock", (req, res, next) => {
   );
 });
 //get all table data 
-router.get("/api/stocks", (req, res, next) => {
+router.get("/api/data", (req, res, next) => {
   let params = {
     TableName: tableName
   };
