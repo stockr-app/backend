@@ -155,13 +155,14 @@ router.get("/api/stock/:stock", (req, res, next) => {
     }
   });
 });
-router.delete("/api/stock/:timestamp", (req, res, next) => {
-  let timestamp = parseInt(req.params.timestamp);
+router.delete("/api/stock", (req, res, next) => {
+  // let timestamp = req.body.timestamp;
+  // let user_id = req.body.user_id
   let params = {
     TableName: tableName,
     Key: {
-      user_id: user_id,
-      timestamp: timestamp
+      user_id: req.body.user_id,
+      timestamp: req.body.timestamp
     }
   };
   docClient.delete(params, (err, data) => {
