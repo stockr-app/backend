@@ -21,7 +21,7 @@ const tableName = "userTable";
 
 router.post("/api/stock", (req, res, next) => {
   let item = req.body.Item;
-  item.timestamp = moment().unix();
+ 
 
   docClient.put(
     {
@@ -135,6 +135,34 @@ router.get("/api/stock/:stock", (req, res, next) => {
     KeyConditionExpression: "stock = :stock",
     ExpressionAttributeValues: {
       ":stock": stock
+    },
+    Limit: 5
+  };
+
+  docClient.query(params, (err, data) => {
+    if (err) {
+      console.log(err);
+      return res.status(err.statusCode).send({
+        message: err.message,
+        status: err.statusCode
+      });
+    } else {
+      if (!_.isEmpty(data.Items)) {
+        return res.status(200).send(data.Items);
+      } else {
+        return res.status(404).send();
+      }
+    }
+  });
+});
+router.get("/api/stock/:premium", (req, res, next) => {
+  let premium = req.params.premium;
+  let params = {
+    TableName: tableName,
+    IndexName: "stock-index",
+    KeyConditionExpression: "premium = :premium",
+    ExpressionAttributeValues: {
+      ":premium": premium
     },
     Limit: 5
   };
