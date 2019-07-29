@@ -20,8 +20,8 @@ const tableName = "userTable";
 
 
 router.post("/api/stock", (req, res, next) => {
-  let item = req.body.Item;
- 
+  let item = req.body;
+  // item.timestamp = moment().unix();
 
   docClient.put(
     {
