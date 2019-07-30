@@ -184,13 +184,13 @@ router.get("/api/stock/:premium", (req, res, next) => {
   });
 });
 router.delete("/api/stock", (req, res, next) => {
-  // let timestamp = req.body.timestamp;
+  // let timestamp = parseInt(req.params.timestamp);
   // let user_id = req.body.user_id
   let params = {
     TableName: tableName,
     Key: {
-      user_id: req.body.user_id,
-      timestamp: req.body.timestamp
+      user_id: req.body.Item.user_id,
+      timestamp: req.body.Item.timestamp
     }
   };
   docClient.delete(params, (err, data) => {
